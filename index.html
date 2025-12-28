@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE HIJAB STORE | Elegance & Modesty</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #1a1a1a;    /* Deep Charcoal */
+            --secondary-bg: #242424;  /* Slightly lighter dark for cards */
+            --accent-color: #c5a47e;   /* Champagne Gold */
+            --text-main: #e0e0e0;     /* Soft White */
+            --text-dim: #b0b0b0;      /* Muted Gray */
+            --header-bg: #121212;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Area */
+        header {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(rgba(18,18,18,0.9), rgba(18,18,18,0.9)), 
+                        url('https://www.transparenttextures.com/patterns/black-linen.png');
+            border-bottom: 1px solid #333;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            letter-spacing: 6px;
+            margin: 0;
+            color: var(--accent-color);
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-style: italic;
+            color: var(--text-dim);
+            margin-top: 10px;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+        }
+
+        /* Navigation Menu */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 20px;
+            background: var(--header-bg);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            border-bottom: 1px solid #333;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 400;
+            transition: 0.3s;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* About Us Section */
+        .about-section {
+            max-width: 800px;
+            margin: 80px auto;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .about-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .about-section p {
+            line-height: 1.8;
+            color: var(--text-dim);
+            font-size: 1.1rem;
+        }
+
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: var(--accent-color);
+            margin: 20px auto;
+        }
+
+        /* Product Grid */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            color: var(--text-main);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 40px;
+        }
+
+        /* Product Card Styling */
+        .product-card {
+            background: var(--secondary-bg);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            transition: all 0.4s ease;
+            text-align: center;
+            border: 1px solid #333;
+        }
+
+        .product-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--accent-color);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            filter: brightness(0.9);
+            transition: 0.4s;
+        }
+
+        .product-card:hover .product-image {
+            filter: brightness(1.05);
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .price {
+            font-weight: 500;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .buy-button {
+            display: inline-block;
+            padding: 12px 35px;
+            background-color: transparent;
+            color: var(--accent-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            text-transform: uppercase;
+            border: 1px solid var(--accent-color);
+            letter-spacing: 1px;
+        }
+
+        .buy-button:hover {
+            background-color: var(--accent-color);
+            color: #1a1a1a;
+            box-shadow: 0 0 20px rgba(197, 164, 126, 0.3);
+        }
+
+        /* Footer Styling */
+        footer {
+            background: #121212;
+            padding: 80px 20px 40px 20px;
+            margin-top: 100px;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+
+        .footer-content h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-color);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .address-section {
+            margin: 30px 0;
+            line-height: 1.8;
+            color: var(--text-dim);
+        }
+
+        .map-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 400;
+            border: 1px solid #444;
+            padding: 10px 25px;
+            border-radius: 50px;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .map-link:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            font-size: 0.75rem;
+            color: #555;
+            margin-top: 50px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>THE HIJAB STORE</h1>
+        <p class="subtitle">LUXURY MODEST WEAR</p>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#about">About</a>
+        <a href="#collection">Collection</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section class="about-section" id="about">
+        <h2>Our Story</h2>
+        <div class="divider"></div>
+        <p>
+            Experience the finest fabrics and elegant designs at <strong>The Hijab Store</strong>. 
+            Nestled in Jamshedpur, we curate premium collections for the modern woman who values 
+            both style and tradition. Our pieces are more than just attire; they are a statement of grace.
+        </p>
+    </section>
+
+    <div class="container" id="collection">
+        <h2 class="section-title">New Arrivals</h2>
+        <div class="product-grid" id="product-container">
+            </div>
+    </div>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <h3>THE HIJAB STORE</h3>
+            <p style="color: #666;">Crafting Elegance Since 2023</p>
+            
+            <div class="address-section">
+                <p><strong>Visit Our Store</strong></p>
+                <p>10th Lane, B-BLOCK DHATKIDIH <br>
+                Jamshedpur, Jharkhand - 831001</p>
+                
+                <a href="https://share.google/STCKbLNFyh2UqSZO9" target="_blank" class="map-link">
+                    📍 Locate on Maps
+                </a>
+            </div>
+            
+            <p class="copyright">© 2025 THE HIJAB STORE. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const products = [
+            { name: "Imported Textured Tie-dye hijab 🤍", price: "₹200" },
+            { name: "Customised couple prayer mat(2pcs)", price: "₹1500" },
+            { name: "Imported ribbed Jersey Hijab", price: "₹240" },
+            { name: "Organza Shimmer Hijab ✨", price: "₹230" },
+            { name: "Lace Mkahna Scarf", price: "₹300" },
+            { name: "Matte Muna Satin", price: "₹230" },
+            { name: "Cut Work Muna Satin", price: "₹220" },
+            { name: "Crinkle Cotton Hijab", price: "₹169" },
+            { name: "Magnet Pin", price: "₹89" },
+            { name: "Sleeve Extention", price: "₹45" },
+            { name: "Premium Hijab Scrunchie", price: "₹70" },
+            { name: "Premium Printed Hijab", price: "₹280" },
+            { name: "Hijab Pins", price: "₹90" },
+            { name: "Tie Headcap", price: "₹60" },
+            { name: "Imported zari Chiffon 🎀", price: "₹230" },
+            { name: "Rhinestone Hijab", price: "₹250" },
+            { name: "Premium heavy Chiffon 🎀", price: "₹149" },
+            { name: "Imported Premium Modal Cotton Hijab", price: "₹200" },
+            { name: "Ombre Chiffon", price: "₹180" },
+            { name: "Imported Bubble Satin", price: "₹230" }
+        ];
+
+        const container = document.getElementById('product-container');
+        const myNumber = "917209510708"; 
+
+        products.forEach((product, index) => {
+            const whatsappMsg = encodeURIComponent(`Hello! I would like to order the ${product.name} for ${product.price}.`);
+            const whatsappURL = `https://wa.me/${myNumber}?text=${whatsappMsg}`;
+
+            const card = `
+                <div class="product-card">
+                    <img src="images/image${index + 1}.jpeg" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <div class="product-name">${product.name}</div>
+                        <div class="price">${product.price}</div>
+                        <a href="${whatsappURL}" target="_blank" class="buy-button">Order via WhatsApp</a>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += card;
+        });
+    </script>
+</body>
+</html>
