@@ -486,13 +486,11 @@
             <p class="copyright">© 2025 THE HIJAB STORE. All rights reserved.</p>
         </div>
     </footer>
-
     <script>
-    
+    // 1. Setup & Configuration
     const myNumber = "917209510708"; 
+    let cart = [];
 
-    // 1. Load Products (Same list as before)
-    const products = [
         { name: "Imported Textured Tie-dye hijab 🤍", price: "200", colors:["Sage", "Olive", "Megenta"]},
         { name: "Customised couple prayer mat(2pcs)", price: "1500", colors:["Golden", "Green", "Black", "Grey"]},
         { name: "Imported ribbed Jersey Hijab", price: "240", colors:["Sage", "Olive", "Megenta"]},
@@ -515,24 +513,43 @@
         { name: "Imported Bubble Satin", price: "230",colors:["Sage", "Olive", "Megenta"] }
     ];
 
-   // 2. Initial Render
+
+    // 3. Initialize Website
+    document.addEventListener('DOMContentLoaded', () => {
+        // Load saved cart from memory
+        const savedCart = localStorage.getItem('hijabStoreCart');
+        if (savedCart) {
+            cart = JSON.parse(savedCart);
+        }
+        
+        renderProducts();
+        updateCartUI();
+    });
+
+    // 4. Render Products to the Grid
     function renderProducts() {
-        container.innerHTML = "";
+        const container = document.getElementById('product-container');
+        if (!container) return; // Stop if the ID is missing
+        
+        container.innerHTML = ""; // Clear existing
+        
         products.forEach((product, index) => {
             let colorOptions = product.colors.map(c => `<option value="${c}">${c}</option>`).join('');
             
             const card = `
                 <div class="product-card">
-                    <img src="images/image${index + 1}.jpg" alt="${product.name}" class="product-image">
+                    <img src="images/image${index + 1}.jpeg" alt="${product.name}" class="product-image" onerror="this.src='https://via.placeholder.com/400x500?text=Hijab+Image'">
                     <div class="product-info">
-                        <div class="product-name">${product.name}</div>
-                        <div class="price">₹${product.price}</div>
+                        <div class="product-name" style="font-family: 'Playfair Display', serif; color: #f2f2f2; font-size: 1.3rem;">${product.name}</div>
+                        <div class="price" style="color: #c5a47e; margin: 10px 0;">₹${product.price}</div>
                         
-                        <select id="color-select-${index}" class="color-dropdown">
+                        <select id="color-select-${index}" class="color-dropdown" style="width: 90%; background: #000; color: #c5a47e; border: 1px solid #333; padding: 8px; margin-bottom: 15px; border-radius: 4px;">
                             ${colorOptions}
                         </select>
 
-                        <button class="buy-button" onclick="addToCart(${index})">Add to Bag</button>
+                        <button class="buy-button" onclick="addToCart(${index})" style="background: #c5a47e; color: #000; padding: 10px 30px; border: none; cursor: pointer; text-transform: uppercase; font-weight: 600; font-size: 0.7rem; letter-spacing: 2px;">
+                            Add to Bag
+                        </button>
                     </div>
                 </div>
             `;
@@ -540,10 +557,11 @@
         });
     }
 
-    // 3. Cart Management
+    // 5. Cart Functions
     function addToCart(index) {
         const product = products[index];
-        const selectedColor = document.getElementById(`color-select-${index}`).value;
+        const colorEl = document.getElementById(`color-select-${index}`);
+        const selectedColor = colorEl ? colorEl.value : "Standard";
         
         cart.push({
             name: product.name,
@@ -553,6 +571,7 @@
         
         saveCart();
         updateCartUI();
+        alert(product.name + " added to bag!");
     }
 
     function removeFromCart(index) {
@@ -566,40 +585,44 @@
     }
 
     function updateCartUI() {
-        document.getElementById('cart-count').innerText = cart.length;
-        const list = document.getElementById('cart-items');
-        list.innerHTML = "";
+        const countEl = document.getElementById('cart-count');
+        const listEl = document.getElementById('cart-items');
+        
+        if (countEl) countEl.innerText = cart.length;
+        if (!listEl) return;
+
+        listEl.innerHTML = "";
         let total = 0;
 
         cart.forEach((item, index) => {
             total += item.price;
-            list.innerHTML += `
-                <div class="cart-item" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            listEl.innerHTML += `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #222; padding-bottom: 10px;">
                     <div style="text-align: left;">
-                        <div style="font-weight: 500;">${item.name}</div>
-                        <div style="font-size: 0.75rem; color: var(--accent-color);">Color: ${item.color}</div>
+                        <div style="color: #fff; font-size: 0.9rem;">${item.name}</div>
+                        <div style="color: #c5a47e; font-size: 0.75rem;">Color: ${item.color}</div>
                     </div>
-                    <div>
-                        <span>₹${item.price}</span>
-                        <i class="fas fa-trash" style="margin-left: 10px; color: #ff4d4d; cursor: pointer;" onclick="removeFromCart(${index})"></i>
+                    <div style="text-align: right;">
+                        <div style="color: #fff;">₹${item.price}</div>
+                        <div style="color: #ff4d4d; font-size: 0.7rem; cursor: pointer; margin-top: 5px;" onclick="removeFromCart(${index})">REMOVE</div>
                     </div>
                 </div>
             `;
         });
         
-        document.getElementById('cart-items').innerHTML += `
-            <div style="border-top: 1px solid #333; margin-top: 15px; padding-top: 10px; display: flex; justify-content: space-between; font-weight: bold;">
-                <span>Total Amount</span>
+        listEl.innerHTML += `
+            <div style="display: flex; justify-content: space-between; font-weight: bold; margin-top: 20px; color: #fff; border-top: 1px solid #c5a47e; padding-top: 10px;">
+                <span>TOTAL</span>
                 <span>₹${total}</span>
             </div>
         `;
     }
 
     function toggleCart() {
-        document.getElementById('cart-drawer').classList.toggle('open');
+        const drawer = document.getElementById('cart-drawer');
+        if (drawer) drawer.classList.toggle('open');
     }
 
-    // 4. THE UPDATED SEND ORDER SCRIPT
     function sendOrder() {
         const name = document.getElementById('cust-name').value.trim();
         const address = document.getElementById('cust-address').value.trim();
@@ -609,45 +632,31 @@
             return;
         }
         if (!name || !address) {
-            alert("Please provide your Name and Delivery Address.");
+            alert("Please provide your Name and Address.");
             return;
         }
 
         let total = cart.reduce((sum, item) => sum + item.price, 0);
-        
-        // Formatting the items list for WhatsApp
         let itemString = "";
         cart.forEach((item, i) => {
-            itemString += `${i + 1}. *${item.name}*%0A   - Color: ${item.color}%0A   - Price: ₹${item.price}%0A%0A`;
+            itemString += `${i + 1}. *${item.name}* (Color: ${item.color}) - ₹${item.price}%0A`;
         });
 
-        const finalMsg = `*🛍️ NEW ORDER - THE HIJAB STORE*%0A` +
-                         `--------------------------------%0A` +
-                         `*👤 CUSTOMER DETAILS*%0A` +
-                         `*Name:* ${name}%0A` +
-                         `*Address:* ${address}%0A` +
-                         `--------------------------------%0A` +
-                         `*📦 ITEMS ORDERED*%0A${itemString}` +
-                         `--------------------------------%0A` +
-                         `*💰 TOTAL AMOUNT: ₹${total}*%0A` +
-                         `--------------------------------%0A` +
-                         `_Please confirm availability and share payment details._`;
+        const finalMsg = `*🛍️ NEW ORDER - THE HIJAB STORE*%0A%0A` +
+                         `*👤 CUSTOMER*%0AName: ${name}%0AAddress: ${address}%0A%0A` +
+                         `*📦 ITEMS*%0A${itemString}%0A` +
+                         `*💰 TOTAL: ₹${total}*%0A%0A` +
+                         `_Order sent from website_`;
 
-        const waURL = `https://wa.me/${myNumber}?text=${finalMsg}`;
+        window.open(`https://wa.me/${myNumber}?text=${finalMsg}`, '_blank');
         
-        // Clear cart after order is sent
         cart = [];
         saveCart();
         updateCartUI();
-        window.open(waURL, '_blank');
     }
-
-    // Initialize
-    renderProducts();
-    updateCartUI();
-</script>
 </script>
 </body>
 </html>
+
 
 
