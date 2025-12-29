@@ -18,7 +18,26 @@
         html {
             scroll-behavior: smooth;
         }
+        .header-socials {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+        }
 
+        .header-socials a {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            text-decoration: none;
+            opacity: 0.7;
+            transition: 0.4s;
+            letter-spacing: 1px;
+        }
+
+        .header-socials a:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--primary-bg);
@@ -244,15 +263,154 @@
             letter-spacing: 2px;
             text-transform: uppercase;
         }
+        /* --- Fixed Cart Drawer Styles --- */
+        #cart-icon {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: var(--accent-color);
+        color: #000;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 2000;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        font-size: 1.2rem;
+    }
+
+    .cart-count {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: #fff;
+        font-size: 0.7rem;
+        padding: 4px 8px;
+        border-radius: 50%;
+        font-weight: bold;
+    }
+
+    #cart-drawer {
+        position: fixed;
+        top: 0;
+        right: -400px;
+        width: 350px;
+        height: 100%;
+        background: var(--secondary-bg);
+        z-index: 3000;
+        transition: 0.4s;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        padding: 40px 25px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #cart-drawer.open { right: 0; }
+#cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 350px;
+    height: 100vh; /* Ensures it takes full height */
+    background: var(--secondary-bg);
+    z-index: 3000;
+    transition: 0.4s;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box; /* Crucial for padding calculation */
+}
+
+#cart-drawer.open { right: 0; }
+
+.cart-items-list {
+    flex: 1; /* This takes up available space */
+    overflow-y: auto; /* Makes only the items list scrollable */
+    margin-bottom: 20px;
+    padding-right: 10px;
+}
+
+/* Custom Scrollbar for the cart list */
+.cart-items-list::-webkit-scrollbar {
+    width: 5px;
+}
+.cart-items-list::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 10px;
+}
+
+.checkout-form {
+    border-top: 1px solid #333;
+    padding-top: 20px;
+    background: var(--secondary-bg);
+    margin-top: auto; /* Pushes form to the bottom */
+}
+
+.checkout-form input, .checkout-form textarea {
+    width: 100%;
+    background: #121212;
+    border: 1px solid #333;
+    color: white;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.checkout-btn {
+    width: 100%;
+    background: var(--accent-color);
+    color: #000;
+    border: none;
+    padding: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 4px;
+    margin-bottom: 10px; /* Space from the very bottom edge */
+}
+
+    
     </style>
 </head>
 <body>
 
     <header>
+        <div class="header-socials">
+            <a href="https://www.instagram.com/thehijabstore2003?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">INSTAGRAM</a>
+            <span>/</span>
+            <a href="https://l.instagram.com/?u=https%3A%2F%2Fyoutube.com%2Fshorts%2FwOxegolJMQg%3Ffeature%3Dshared%26fbclid%3DPAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnZIU3f1JLYnwwduyY9jger5jMo6ySGRg5yObUb_EnSKhbRye2eGzLlxOh2AA_aem_ys8l1oVIdtQdgAZVZWIWcQ&e=AT07CI5tIXWZz7Kkyc2ldkRDNzkhI4HpWG_I9Da7NNAueZ2V13nUAYQuHuYjOH9gspzl41vs_hMqT4LE-fuLXwI5i74cFcIUt1b7EkgeTA">YOUTUBE</a>
+            <span>/</span>
+            <a href="https://wa.me/917209510708">WHATSAPP</a>
+        </div>
         <h1>THE HIJAB STORE</h1>
-        <p class="subtitle">LUXURY MODEST WEAR</p>
+        <p class="subtitle">Elegance in Modesty</p>
     </header>
+    <div id="cart-icon" onclick="toggleCart()">
+    <i class="fas fa-shopping-bag"></i>
+    <span class="cart-count" id="cart-count">0</span>
+</div>
 
+<div id="cart-drawer">
+    <span class="close-cart" onclick="toggleCart()">CLOSE</span>
+    <div class="cart-header">Your Bag</div>
+    <div class="cart-items-list" id="cart-items">
+        </div>
+    
+    <div class="checkout-form">
+        <div class="divider"></div>
+        <p style="font-size: 0.8rem; color: var(--accent-color);">SHIPPING DETAILS</p>
+        <input type="text" id="cust-name" placeholder="Full Name">
+        <textarea id="cust-address" placeholder="Full Delivery Address" rows="3"></textarea>
+        <button class="checkout-btn" onclick="sendOrder()">Send Order via WhatsApp</button>
+    </div>
+</div>
     <nav>
         <a href="#">Home</a>
         <a href="#about">About</a>
@@ -296,48 +454,124 @@
     </footer>
 
     <script>
-        const products = [
-            { name: "Imported Textured Tie-dye hijab 🤍", price: "₹200" },
-            { name: "Customised couple prayer mat(2pcs)", price: "₹1500" },
-            { name: "Imported ribbed Jersey Hijab", price: "₹240" },
-            { name: "Organza Shimmer Hijab ✨", price: "₹230" },
-            { name: "Lace Mkahna Scarf", price: "₹300" },
-            { name: "Matte Muna Satin", price: "₹230" },
-            { name: "Cut Work Muna Satin", price: "₹220" },
-            { name: "Crinkle Cotton Hijab", price: "₹169" },
-            { name: "Magnet Pin", price: "₹89" },
-            { name: "Sleeve Extention", price: "₹45" },
-            { name: "Premium Hijab Scrunchie", price: "₹70" },
-            { name: "Premium Printed Hijab", price: "₹280" },
-            { name: "Hijab Pins", price: "₹90" },
-            { name: "Tie Headcap", price: "₹60" },
-            { name: "Imported zari Chiffon 🎀", price: "₹230" },
-            { name: "Rhinestone Hijab", price: "₹250" },
-            { name: "Premium heavy Chiffon 🎀", price: "₹149" },
-            { name: "Imported Premium Modal Cotton Hijab", price: "₹200" },
-            { name: "Ombre Chiffon", price: "₹180" },
-            { name: "Imported Bubble Satin", price: "₹230" }
-        ];
+    
+    const myNumber = "917209510708"; 
 
-        const container = document.getElementById('product-container');
-        const myNumber = "917209510708"; 
+    // 1. Load Products (Same list as before)
+    const products = [
+        { name: "Imported Textured Tie-dye hijab 🤍", price: "200" },
+        { name: "Customised couple prayer mat(2pcs)", price: "1500" },
+        { name: "Imported ribbed Jersey Hijab", price: "240" },
+        { name: "Organza Shimmer Hijab ✨", price: "230" },
+        { name: "Lace Mkahna Scarf", price: "300" },
+        { name: "Matte Muna Satin", price: "230" },
+        { name: "Cut Work Muna Satin", price: "220" },
+        { name: "Crinkle Cotton Hijab", price: "169" },
+        { name: "Magnet Pin", price: "89" },
+        { name: "Sleeve Extention", price: "45" },
+        { name: "Premium Hijab Scrunchie", price: "70" },
+        { name: "Premium Printed Hijab", price: "280" },
+        { name: "Hijab Pins", price: "90" },
+        { name: "Tie Headcap", price: "60" },
+        { name: "Imported zari Chiffon 🎀", price: "230" },
+        { name: "Rhinestone Hijab", price: "250" },
+        { name: "Premium heavy Chiffon 🎀", price: "149" },
+        { name: "Imported Premium Modal Cotton Hijab", price: "200" },
+        { name: "Ombre Chiffon", price: "180" },
+        { name: "Imported Bubble Satin", price: "230" }
+    ];
 
-        products.forEach((product, index) => {
-            const whatsappMsg = encodeURIComponent(`Hello! I would like to order the ${product.name} for ${product.price}.`);
-            const whatsappURL = `https://wa.me/${myNumber}?text=${whatsappMsg}`;
+    // 2. Render Products
+    const container = document.getElementById('product-container');
+    products.forEach((product, index) => {
+        const card = `
+            <div class="product-card">
+                <img src="images/image${index + 1}.jpeg" alt="${product.name}" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">${product.name}</div>
+                    <div class="price">₹${product.price}</div>
+                    <button class="buy-button" onclick="addToCart('${product.name}', ${product.price})">Add to Bag</button>
+                </div>
+            </div>
+        `;
+        container.innerHTML += card;
+    });
 
-            const card = `
-                <div class="product-card">
-                    <img src="images/image${index + 1}.jpeg" alt="${product.name}" class="product-image">
-                    <div class="product-info">
-                        <div class="product-name">${product.name}</div>
-                        <div class="price">${product.price}</div>
-                        <a href="${whatsappURL}" target="_blank" class="buy-button">Order via WhatsApp</a>
-                    </div>
+    // 3. Cart Logic
+    // 1. Load cart from memory as soon as the page opens
+    let cart = JSON.parse(localStorage.getItem('hijabStoreCart')) || [];
+    updateCartUI(); // Display saved items immediately
+
+    function toggleCart() {
+        document.getElementById('cart-drawer').classList.toggle('open');
+    }
+
+    function addToCart(name, price) {
+        cart.push({name, price});
+        saveCart(); // Save to memory
+        updateCartUI();
+    }
+
+    // New function to Save to Browser Memory
+    function saveCart() {
+        localStorage.setItem('hijabStoreCart', JSON.stringify(cart));
+    }
+
+    function updateCartUI() {
+        document.getElementById('cart-count').innerText = cart.length;
+        const list = document.getElementById('cart-items');
+        list.innerHTML = "";
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            total += item.price;
+            list.innerHTML += `
+                <div class="cart-item">
+                    <span>${item.name}</span>
+                    <span style="cursor:pointer; color:red;" onclick="removeFromCart(${index})">✕</span>
+                    <span>₹${item.price}</span>
                 </div>
             `;
-            container.innerHTML += card;
         });
-    </script>
+        list.innerHTML += `<div class="divider"></div><div class="cart-item"><strong>Total</strong><strong>₹${total}</strong></div>`;
+    }
+
+    // New function to remove items (incase they change their mind)
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        saveCart(); // Update memory
+        updateCartUI();
+    }
+
+    // Update your sendOrder function to clear cart after checkout
+    function sendOrder() {
+        const name = document.getElementById('cust-name').value;
+        const address = document.getElementById('cust-address').value;
+
+        if(!name || !address || cart.length === 0) {
+            alert("Please add items to cart and fill in your details.");
+            return;
+        }
+
+        let itemDetails = cart.map(item => `• ${item.name} - ₹${item.price}`).join('%0A');
+        let total = cart.reduce((sum, item) => sum + item.price, 0);
+
+        const message = `*NEW ORDER - THE HIJAB STORE*%0A%0A` +
+                        `*Customer Name:* ${name}%0A` +
+                        `*Address:* ${address}%0A%0A` +
+                        `*Items Ordered:*%0A${itemDetails}%0A%0A` +
+                        `*Total Amount:* ₹${total}%0A%0A` +
+                        `Please confirm my order. Thank you!`;
+
+        const whatsappURL = `https://wa.me/${myNumber}?text=${message}`;
+        
+        // Clear cart after redirecting to WhatsApp
+        cart = [];
+        saveCart();
+        updateCartUI();
+        
+        window.open(whatsappURL, '_blank');
+    }
+</script>
 </body>
 </html>
