@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Modesty Journal | Hijab Store Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #1a1a1a;
+            --card-bg: #242424;
+            --accent: #c5a47e;
+            --text: #e0e0e0;
+            --dim: #b0b0b0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            border-bottom: 1px solid #333;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--accent);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--dim);
+            text-decoration: none;
+            font-size: 0.8rem;
+            border: 1px solid #444;
+            padding: 8px 20px;
+            border-radius: 50px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Blog Grid */
+        .blog-container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .blog-post {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #333;
+            transition: 0.3s;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .blog-img {
+            width: 100%;
+            height: 200px;
+            background: #333; /* Placeholder color */
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 25px;
+        }
+
+        .date {
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            margin: 10px 0;
+            font-size: 1.5rem;
+        }
+
+        .excerpt {
+            color: var(--dim);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px;
+            color: var(--dim);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <p style="letter-spacing: 4px; color: var(--dim); margin-bottom: 10px;">THE MODESTY JOURNAL</p>
+        <h1>Our Blog</h1>
+        <a href="index.html" class="back-link">← BACK TO SHOP</a>
+    </header>
+
+    <div class="blog-container">
+        <article class="blog-post">
+            <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=800&q=80" alt="Styling Hijabs" class="blog-img">
+            <div class="blog-content">
+                <span class="date">December 30, 2025</span>
+                <h2>How to Match Your Hijab with Your Outfit</h2>
+                <p class="excerpt">A guide to color theory and fabric pairing to ensure you look polished every single day...</p>
+                <a href="#" class="read-more">READ POST →</a>
+            </div>
+        </article>
+
+        <article class="blog-post">
+            <img src="https://images.unsplash.com/photo-1590736704728-f4730bb30770?auto=format&fit=crop&w=800&q=80" alt="Fabric Guide" class="blog-img">
+            <div class="blog-content">
+                <span class="date">December 25, 2025</span>
+                <h2>Why Chiffon is the Ultimate Queen</h2>
+                <p class="excerpt">Lightweight, airy, and elegant. We explain why chiffon remains our best-selling fabric year after year...</p>
+                <a href="#" class="read-more">READ POST →</a>
+            </div>
+        </article>
+
+        <article class="blog-post">
+            <img src="https://images.unsplash.com/photo-1573867639040-6dd25fa5f597?auto=format&fit=crop&w=800&q=80" alt="Care Tips" class="blog-img">
+            <div class="blog-content">
+                <span class="date">December 20, 2025</span>
+                <h2>Caring for Your Premium Hijabs</h2>
+                <p class="excerpt">Tips on washing and storing your delicate hijabs so they stay looking brand new for years...</p>
+                <a href="#" class="read-more">READ POST →</a>
+            </div>
+        </article>
+    </div>
+
+    <footer>
+        <p>© 2025 THE HIJAB STORE | Jamshedpur</p>
+    </footer>
+
+</body>
+</html>
